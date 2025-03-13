@@ -5,7 +5,20 @@ function loadCategories() {
 }
 
 function displayCategories(categories) {
-    console.log(categories);
+    // get the container
+    const categoryContainer = document.getElementById("category-container");
+    // loop on array of obj
+    for (const cat of categories) {
+        const categoryDiv = document.createElement("div")
+        categoryDiv.innerHTML = `
+        <button class="btn btn-sm">${cat.category}</button>
+
+        `
+        categoryContainer.append(categoryDiv)
+    }
+
     
 }
+
+
 loadCategories();
