@@ -18,7 +18,6 @@
       href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
       rel="stylesheet"
     />
-
     <style>
       .inter-font {
         font-family: "Inter", sans-serif;
@@ -27,7 +26,7 @@
       }
     </style>
   </head>
-  <body class="inter-font">
+  <body class="inter-font container mx-auto">
     <header class="container mx-auto my-10">
       <section>
        <nav class="flex justify-between">
@@ -48,10 +47,14 @@
         </div>
       </section>
       <section id="category-container" class="flex justify-center gap-5 py-4">
-        <button class="btn btn-sm bg-[#FF1F3D] text-white">All</button>
+        <button onclick="loadVideos()" class="btn btn-sm bg-[#FF1F3D] text-white">All</button>
       </section>
     </header>
-
+    <main>
+      <section id="video-container" class="container mx-auto grid grid-cols-4 gap-5">
+        
+      </section>
+    </main>
 
 
 
