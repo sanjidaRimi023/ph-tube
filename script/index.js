@@ -1,29 +1,28 @@
 function loadCategories() {
-    // fetch data
-    fetch("https://openapi.programming-hero.com/api/phero-tube/categories")
-        // convert promise to json
-        .then(res => res.json())
-        // send data to displayCategories
-        .then(data => displayCategories(data.categories))
-        .catch(error => console.error("error fetching categories", error)
-        )
+  // fetch data
+  fetch("https://openapi.programming-hero.com/api/phero-tube/categories")
+    // convert promise to json
+    .then(res => res.json())
+    // send data to displayCategories
+    .then(data => displayCategories(data.categories))
+    .catch(error => console.error("error fetching categories", error)
+    )
 }
 
 function displayCategories(categories) {
-    // get the container
-    const categoryContainer = document.getElementById("category-container");
-    // categoryContainer.innerHTML = "";
-    // loop operation arr of obj
-    for (let cat of categories) {
-        // console.log(cat);
-        // create element
-        const categoryDiv = document.createElement("div");
-        categoryDiv.innerHTML = `
-        <button onclick="loadCategoryVideos(${cat.category_id})" class="btn btn-sm hover:bg-[#FF1F3D] hover:text-white">${cat.category}</button>
+  // get the container
+  const categoryContainer = document.getElementById("category-container");
+  // loop operation arr of obj
+  for (let cat of categories) {
+    // console.log(cat);
+    // create element
+    const categoryDiv = document.createElement("div");
+    categoryDiv.innerHTML = `
+        <button id="btn-${cat.category_id}" onclick="loadCategoryVideos(${cat.category_id})" class="btn btn-sm hover:bg-[#FF1F3D] hover:text-white">${cat.category}</button>
         `;
-        // append the element
-        categoryContainer.append(categoryDiv)
-    }
+    // append the element
+    categoryContainer.append(categoryDiv)
+  }
 }
 
 /*{
@@ -50,18 +49,26 @@ function displayCategories(categories) {
       },*/
 
 function loadVideos() {
-    fetch("https://openapi.programming-hero.com/api/phero-tube/videos")
-        .then(response => response.json())
-        .then((data) => displayVideos(data.videos));
+  fetch("https://openapi.programming-hero.com/api/phero-tube/videos")
+    .then(response => response.json())
+    .then((data) => displayVideos(data.videos));
 }
 
 const displayVideos = (videos) => {
-    const videoContainer = document.getElementById("video-container");
-    videoContainer.innerHTML = "";
-    videos.forEach(video => {
-        console.log(video);
-        const videoCard = document.createElement("div");
-        videoCard.innerHTML = `
+  const videoContainer = document.getElementById("video-container");
+  videoContainer.innerHTML = "";
+  if (videos.length === 0) {
+    videoContainer.innerHTML = `
+    <div class="col-span-full flex flex-col py-20 text-center items-center">
+          <img src="assets/Icon.png" alt="">
+          <h1 class="text-3xl font-bold ">Oops!!Sorry, There is no content here</h1>
+        </div>`;
+    return;
+  }
+  videos.forEach(video => {
+    console.log(video);
+    const videoCard = document.createElement("div");
+    videoCard.innerHTML = `
         <div class="card bg-base-100 shadow-sm">
           <figure class="relative">
               <img class="w-full h-[200px] object-cover"
@@ -85,18 +92,24 @@ const displayVideos = (videos) => {
           </div>
       </div>
         `;
-        videoContainer.append(videoCard);
+    videoContainer.append(videoCard);
 
-    });
+  });
 }
 
 const loadCategoryVideos = (id) => {
-    const url = `
+  const url = `
      https://openapi.programming-hero.com/api/phero-tube/category/${id}`;
-    // console.log(url);
-    fetch(url)
-        .then(res => res.json())
-        .then((data)=> displayVideos(data.category));
+  // console.log(url);
+  fetch(url)
+    .then(res => res.json())
+    .then((data) => {
+      const clickBtn = document.getElementById(`btn-${id}`);
+      clickBtn.classList.add("active")
+      console.log(clickBtn);
+
+      displayVideos(data.category)
+    });
 
 };
 loadCategories()

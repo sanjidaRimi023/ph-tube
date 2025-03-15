@@ -24,6 +24,10 @@
         font-optical-sizing: auto;
         font-style: normal;
       }
+      .active{
+        background: #FF1F3D;
+        color: #ffffff;
+      }
     </style>
   </head>
   <body class="inter-font container mx-auto">
@@ -47,12 +51,15 @@
         </div>
       </section>
       <section id="category-container" class="flex justify-center gap-5 py-4">
-        <button onclick="loadVideos()" class="btn btn-sm bg-[#FF1F3D] text-white">All</button>
+        <button onclick="loadVideos()" class="btn btn-sm hover:bg-[#FF1F3D] hover:text-white">All</button>
       </section>
     </header>
     <main>
       <section id="video-container" class="container mx-auto grid grid-cols-4 gap-5">
-        
+        <div class="col-span-full flex flex-col py-20 text-center items-center">
+          <img src="assets/Icon.png" alt="">
+          <h1 class="text-3xl font-bold ">Oops!!Sorry, There is no content here</h1>
+        </div>
       </section>
     </main>
 
