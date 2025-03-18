@@ -8,50 +8,39 @@ function loadCategories() {
     .catch(error => console.error("error fetching categories", error)
     )
 }
+function removeActiveBtn() {
+  const activeBtns = document.getElementsByClassName("active");
+  for (const btn of activeBtns) {
+    btn.classList.remove("active")
+    
+  }
 
+ }
 function displayCategories(categories) {
-  // get the container
+
   const categoryContainer = document.getElementById("category-container");
-  // loop operation arr of obj
+
   for (let cat of categories) {
     // console.log(cat);
-    // create element
+   
     const categoryDiv = document.createElement("div");
     categoryDiv.innerHTML = `
         <button id="btn-${cat.category_id}" onclick="loadCategoryVideos(${cat.category_id})" class="btn btn-sm hover:bg-[#FF1F3D] hover:text-white">${cat.category}</button>
         `;
-    // append the element
+
     categoryContainer.append(categoryDiv)
   }
 }
 
-/*{
-    "status": true,
-    "message": "successfully fetched all the videos",
-    "videos": [
-      {
-        "category_id": "1001",
-        "video_id": "aaaa",
-        "thumbnail": "https://i.ibb.co/L1b6xSq/shape.jpg",
-        "title": "Shape of You",
-        "authors": [
-          {
-            "profile_picture": "https://i.ibb.co/D9wWRM6/olivia.jpg",
-            "profile_name": "Olivia Mitchell",
-            "verified": ""
-          }
-        ],
-        "others": {
-          "views": "100K",
-          "posted_date": "16278"
-        },
-        "description": "Dive into the rhythm of 'Shape of You,' a captivating track that blends pop sensibilities with vibrant beats. Created by Olivia Mitchell, this song has already gained 100K views since its release. With its infectious melody and heartfelt lyrics, 'Shape of You' is perfect for fans looking for an uplifting musical experience. Let the music take over as Olivia's vocal prowess and unique style create a memorable listening journey."
-      },*/
 
 function loadVideos() {
   fetch("https://openapi.programming-hero.com/api/phero-tube/videos")
     .then(response => response.json())
-    .then((data) => displayVideos(data.videos));
+    .then((data) => {
+      removeActiveBtn();
+      document.getElementById("all-btn").classList.add("active");
+      displayVideos(data.videos);
+    })
 }
 
 const displayVideos = (videos) => {
@@ -66,7 +55,7 @@ const displayVideos = (videos) => {
     return;
   }
   videos.forEach(video => {
-    console.log(video);
+    // console.log(video);
     const videoCard = document.createElement("div");
     videoCard.innerHTML = `
         <div class="card bg-base-100 shadow-sm">
@@ -104,9 +93,10 @@ const loadCategoryVideos = (id) => {
   fetch(url)
     .then(res => res.json())
     .then((data) => {
+      removeActiveBtn();
       const clickBtn = document.getElementById(`btn-${id}`);
       clickBtn.classList.add("active")
-      console.log(clickBtn);
+      // console.log(clickBtn);
 
       displayVideos(data.category)
     });
