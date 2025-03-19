@@ -8,24 +8,22 @@
     <link
       href="https://cdn.jsdelivr.net/npm/daisyui@5"
       rel="stylesheet"
-      type="text/css"
-    />
+      type="text/css" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <!-- google font -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
-      rel="stylesheet"
-    />
+      rel="stylesheet" />
     <style>
       .inter-font {
         font-family: "Inter", sans-serif;
         font-optical-sizing: auto;
         font-style: normal;
       }
-      .active{
-        background: #FF1F3D;
+      .active {
+        background: #ff1f3d;
         color: #ffffff;
       }
     </style>
@@ -33,39 +31,57 @@
   <body class="inter-font container mx-auto">
     <header class="container mx-auto my-10">
       <section>
-       <nav class="flex justify-between">
-        <div class="">
-          <img class="h-9 w-[175px]" src="assets/Logo.png" alt="" />
-        </div>
-        <div class="sort">
-          <button class="btn text-lg">Sort by view</button>
-        </div>
-        <div class="blog">
-          <button class="btn bg-[#FF1F3D] text-lg text-white ml-30 hover:bg-white hover:text-black">
-            Blog
-          </button>
-        </div>
-       </nav>
+        <nav class="flex justify-between">
+          <div class="">
+            <img class="h-9 w-[175px]" src="assets/Logo.png" alt="" />
+          </div>
+          <div class="sort">
+            <label class="input">
+              <svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></g></svg>
+              <input id="search-input" type="search" required placeholder="Search"/>
+            </label>
+          </div>
+          <div class="blog">
+            <button
+              class="btn bg-[#FF1F3D] text-lg text-white ml-30 hover:bg-white hover:text-black">
+              Blog
+            </button>
+          </div>
+        </nav>
         <div>
           <hr class="border border-b-1 my-6 border-[#17171733]" />
         </div>
       </section>
       <section id="category-container" class="flex justify-center gap-5 py-4">
-        <button id="all-btn" onclick="loadVideos()" class="btn btn-sm">All</button>
+        <button id="all-btn" onclick="loadVideos()" class="btn btn-sm">
+          All
+        </button>
       </section>
     </header>
     <main>
-      <section id="video-container" class="container mx-auto grid grid-cols-4 gap-5">
+      <section
+        id="video-container"
+        class="container mx-auto grid grid-cols-4 gap-5">
         <div class="col-span-full flex flex-col py-20 text-center items-center">
-          <img src="assets/Icon.png" alt="">
-          <h1 class="text-3xl font-bold ">Oops..!!Sorry, There is no content here.</h1>
+          <img src="assets/Icon.png" alt="" />
+          <h1 class="text-3xl font-bold">
+            Oops..!!Sorry, There is no content here.
+          </h1>
         </div>
       </section>
+      <dialog id="video_details" class="modal">
+        <div class="modal-box">
+          <div id="details-container">
+          </div>
+          <div class="modal-action">
+            <form method="dialog">
+              <button class="btn">Close</button>
+            </form>
+          </div>
+        </div>
+      </dialog>
     </main>
 
-
-
     <script src="script/index.js"></script>
-
   </body>
 </html>
