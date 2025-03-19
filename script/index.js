@@ -8,6 +8,15 @@ function loadCategories() {
     .catch(error => console.error("error fetching categories", error)
     )
 }
+function showLoader() {
+  document.getElementById("loader").classList.remove("hidden")
+  document.getElementById("video-container").classList.add("hidden")
+}
+function hideLoader() {
+  document.getElementById("loader").classList.add("hidden")
+  document.getElementById("video-container").classList.remove("hidden")
+}
+
 function removeActiveBtn() {
   const activeBtns = document.getElementsByClassName("active");
   for (const btn of activeBtns) {
@@ -33,6 +42,7 @@ function displayCategories(categories) {
 
 
 function loadVideos(searchText = "") {
+  showLoader();
   fetch(`https://openapi.programming-hero.com/api/phero-tube/videos?title=${searchText}`)
     .then(response => response.json())
     .then((data) => {
@@ -51,6 +61,7 @@ const displayVideos = (videos) => {
           <img src="assets/Icon.png" alt="">
           <h1 class="text-3xl font-bold ">Oops!!Sorry, There is no content here</h1>
         </div>`;
+    hideLoader()
     return;
   }
   videos.forEach(video => {
@@ -86,9 +97,11 @@ const displayVideos = (videos) => {
     videoContainer.append(videoCard);
 
   });
+  hideLoader()
 }
 
 const loadCategoryVideos = (id) => {
+  showLoader();
   const url = `
      https://openapi.programming-hero.com/api/phero-tube/category/${id}`;
   // console.log(url);
